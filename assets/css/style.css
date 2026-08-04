@@ -988,6 +988,8 @@ font-family: 'Mehr Nastaliq', 'MehrNastaliqRegular', 'Noto Nastaliq Urdu', serif
   padding-inline: 45px;
   display: flex;
   flex-direction: column;
+  gap: 16px;
+  align-items: stretch;
 }
 
 /* Scrollable Container with Snap */
@@ -997,8 +999,10 @@ font-family: 'Mehr Nastaliq', 'MehrNastaliqRegular', 'Noto Nastaliq Urdu', serif
   overflow-x: auto;
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
-  padding-block: 15px 30px;
+  padding-block: 15px 0;
+  padding-inline: 4px;
   -webkit-overflow-scrolling: touch;
+  direction: rtl;
 }
 
 /* ہائیڈ سکرول بار */
@@ -1254,8 +1258,10 @@ font-family: 'Mehr Nastaliq', 'MehrNastaliqRegular', 'Noto Nastaliq Urdu', serif
     justify-content: center;
     align-items: center;
     gap: 8px;
-    margin-top: 18px;
-    direction: ltr; /* Keeps dots ordered consistently */
+    margin-top: 12px;
+    padding-inline: 4px;
+    direction: rtl;
+    width: 100%;
   }
 
   .dot {
@@ -1266,6 +1272,7 @@ font-family: 'Mehr Nastaliq', 'MehrNastaliqRegular', 'Noto Nastaliq Urdu', serif
     border: 1px solid rgba(224, 169, 109, 0.4);
     cursor: pointer;
     transition: all 0.3s ease;
+    flex-shrink: 0;
   }
 
   .dot.active {
@@ -1276,11 +1283,32 @@ font-family: 'Mehr Nastaliq', 'MehrNastaliqRegular', 'Noto Nastaliq Urdu', serif
   }
 }
 
-/* Hide pagination dots on Desktop */
-@media (min-width: 769px) {
-  .reviews-dots {
-    display: none !important;
-  }
+.reviews-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  direction: rtl;
+  margin-top: 8px;
+  padding-inline: 4px;
+  width: 100%;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: rgba(224, 169, 109, 0.25);
+  border: 1px solid rgba(224, 169, 109, 0.4);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  width: 24px;
+  border-radius: 12px;
+  background-color: #e0a96d;
+  box-shadow: 0 0 8px rgba(224, 169, 109, 0.5);
 }
 
 /*-----------------------------------*\
