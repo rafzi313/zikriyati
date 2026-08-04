@@ -1239,6 +1239,45 @@ font-family: 'Mehr Nastaliq', 'MehrNastaliqRegular', 'Noto Nastaliq Urdu', serif
   }
 }
 
+/* Hide arrow buttons on mobile screens & show dots */
+@media (max-width: 768px) {
+  .reviews-slider-wrapper .slider-arrow {
+    display: none !important; /* Hides arrows on mobile */
+  }
+
+  .reviews-dots {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 18px;
+    direction: ltr; /* Keeps dots ordered consistently */
+  }
+
+  .dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background-color: rgba(224, 169, 109, 0.25);
+    border: 1px solid rgba(224, 169, 109, 0.4);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .dot.active {
+    width: 24px; /* Expands into a pill shape for current card */
+    border-radius: 12px;
+    background-color: #e0a96d;
+    box-shadow: 0 0 8px rgba(224, 169, 109, 0.5);
+  }
+}
+
+/* Hide pagination dots on Desktop */
+@media (min-width: 769px) {
+  .reviews-dots {
+    display: none !important;
+  }
+}
 
 /*-----------------------------------*\
   #MEDIA QUERIES
