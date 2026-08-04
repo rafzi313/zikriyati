@@ -2079,3 +2079,11 @@ font-family: 'Mehr Nastaliq', 'MehrNastaliqRegular', 'Noto Nastaliq Urdu', serif
     color: #e0a96d !important;
   }
 }
+
+.slider-btn ion-icon,
+.slider-btn i,
+.slider-btn svg {
+  display: block !important;
+  font-size: 2.2rem !important;
+  color: #e0a96d !important;
+}
