@@ -986,6 +986,8 @@ font-family: 'Mehr Nastaliq', 'MehrNastaliqRegular', 'Noto Nastaliq Urdu', serif
 .reviews-slider-wrapper {
   position: relative;
   padding-inline: 45px;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Scrollable Container with Snap */
@@ -1093,6 +1095,8 @@ font-family: 'Mehr Nastaliq', 'MehrNastaliqRegular', 'Noto Nastaliq Urdu', serif
 .reviews-slider-wrapper {
   position: relative;
   padding-inline: 45px; /* Space for arrow buttons */
+  display: flex;
+  flex-direction: column;
 }
 
 /* Horizontal Track Setup */
