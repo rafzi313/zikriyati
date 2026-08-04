@@ -2040,3 +2040,42 @@ font-family: 'Mehr Nastaliq', 'MehrNastaliqRegular', 'Noto Nastaliq Urdu', serif
   .footer .logo { margin-block-end: 0; }
 
 }
+
+/* Ensure review slider container allows visible overflow elements */
+.reviews-section,
+.reviews-container,
+.swiper {
+  overflow: visible !important;
+  position: relative;
+}
+
+/* Force Arrow Visibility & Layering for Mobile & Desktop */
+.swiper-button-next,
+.swiper-button-prev,
+.slider-btn {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 99 !important; /* Forces arrows above cards */
+  pointer-events: auto !important;
+}
+
+/* Specific Mobile Positioning Fixes */
+@media (max-width: 768px) {
+  .swiper-button-prev,
+  .slider-btn.prev {
+    left: 10px !important; /* Pulls left arrow inside visible viewport */
+  }
+
+  .swiper-button-next,
+  .slider-btn.next {
+    right: 10px !important; /* Pulls right arrow inside visible viewport */
+  }
+
+  /* Force icon rendering and size */
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    font-size: 20px !important;
+    color: #e0a96d !important;
+  }
+}
