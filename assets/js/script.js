@@ -247,3 +247,4 @@ if (grid && dotsContainer) {
     }, { passive: true });
   }
 }
+
