@@ -188,3 +188,62 @@ document.addEventListener("DOMContentLoaded", () => {
 
   sections.forEach((section) => sectionObserver.observe(section));
 });
+
+// Add this inside document.addEventListener("DOMContentLoaded", () => { ... })
+
+const grid = document.getElementById('reviewsGrid');
+const dotsContainer = document.getElementById('reviewsDots');
+
+if (grid && dotsContainer) {
+  const cards = grid.querySelectorAll('.review-card');
+
+  if (cards.length > 0) {
+    // Generate dots based on total cards
+    cards.forEach((_, index) => {
+      const dot = document.createElement('span');
+      dot.classList.add('dot');
+      if (index === 0) dot.classList.add('active');
+
+      // Tap dot to scroll to card
+      dot.addEventListener('click', () => {
+        cards[index].scrollIntoView({
+          behavior: 'smooth',
+          inline: 'center',
+          block: 'nearest'
+        });
+      });
+
+      dotsContainer.appendChild(dot);
+    });
+
+    const dots = dotsContainer.querySelectorAll('.dot');
+
+    // Update active dot automatically on touch swipe
+    grid.addEventListener('scroll', () => {
+      const gridRect = grid.getBoundingClientRect();
+      const gridCenter = gridRect.left + gridRect.width / 2;
+
+      let closestIndex = 0;
+      let minDistance = Infinity;
+
+      cards.forEach((card, index) => {
+        const cardRect = card.getBoundingClientRect();
+        const cardCenter = cardRect.left + cardRect.width / 2;
+        const distance = Math.abs(gridCenter - cardCenter);
+
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestIndex = index;
+        }
+      });
+
+      dots.forEach((dot, idx) => {
+        if (idx === closestIndex) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+    }, { passive: true });
+  }
+}
