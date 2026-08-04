@@ -78,7 +78,6 @@ if (tabCard.length) {
  */
 document.querySelectorAll('.read-more-btn').forEach(button => {
   button.addEventListener('click', function () {
-    // اپنے متعلقہ کارڈ (اقتباس ہو یا تبصرہ) کو تلاش کریں
     const card = this.closest('.excerpt-card') || this.closest('.review-card');
 
     if (card) {
@@ -97,14 +96,15 @@ document.querySelectorAll('.read-more-btn').forEach(button => {
 });
 
 /**
- * Horizontal Arrow Scroll Handler for Reviews
+ * Horizontal Arrow Scroll Handler for Reviews (RTL Compatible)
  */
 const reviewsGrid = document.getElementById('reviewsGrid');
 const prevBtn = document.getElementById('prevReview');
 const nextBtn = document.getElementById('nextReview');
 
 if (reviewsGrid && prevBtn && nextBtn) {
-  prevBtn.addEventListener('click', () => {
+  prevBtn.addEventListener('click', (e) => {
+    e.preventDefault();
     const card = reviewsGrid.querySelector('.review-card');
     if (card) {
       const cardWidth = card.offsetWidth + 25;
@@ -112,7 +112,8 @@ if (reviewsGrid && prevBtn && nextBtn) {
     }
   });
 
-  nextBtn.addEventListener('click', () => {
+  nextBtn.addEventListener('click', (e) => {
+    e.preventDefault();
     const card = reviewsGrid.querySelector('.review-card');
     if (card) {
       const cardWidth = card.offsetWidth + 25;
@@ -121,13 +122,20 @@ if (reviewsGrid && prevBtn && nextBtn) {
   });
 }
 
-document.getElementById('current-year').textContent = new Date().getFullYear();
-
+/**
+ * DOMContentLoaded Initializations
+ */
 document.addEventListener("DOMContentLoaded", () => {
+  // Update Footer Dynamic Year
+  const yearElement = document.getElementById('current-year');
+  if (yearElement) {
+    yearElement.textContent = new Date().getFullYear();
+  }
+
   const navLinks = document.querySelectorAll("[data-nav-link]");
   const sections = document.querySelectorAll("section[id]");
 
-  // 1. Highlight on Click
+  // 1. Highlight navbar item on Click
   navLinks.forEach((link) => {
     link.addEventListener("click", function () {
       navLinks.forEach((item) => item.classList.remove("active"));
@@ -135,28 +143,30 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  const swiper = new Swiper('.reviews-slider', {
-  // Enables swipe touch & arrows simultaneously
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-  },
-  breakpoints: {
-    0: {
-      slidesPerView: 1,
-      navigation: { enabled: true } // Keeps arrows active on mobile
-    },
-    768: {
-      slidesPerView: 2,
-    }
+  // Optional Swiper initialization (if Swiper library is loaded)
+  if (typeof Swiper !== "undefined" && document.querySelector('.reviews-slider')) {
+    new Swiper('.reviews-slider', {
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      breakpoints: {
+        0: {
+          slidesPerView: 1,
+          navigation: { enabled: true }
+        },
+        768: {
+          slidesPerView: 2,
+        }
+      }
+    });
   }
-});
-  
-  // 2. Highlight on Scroll using IntersectionObserver
+
+  // 2. Highlight navbar item on Scroll using IntersectionObserver
   const observerOptions = {
     root: null,
-    rootMargin: "-20% 0px -60% 0px", // Triggers when section is near middle of viewport
-    threshold: 0
+    rootMargin: "-20% 0px -50% 0px",
+    threshold: 0.1
   };
 
   const sectionObserver = new IntersectionObserver((entries) => {
@@ -165,8 +175,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const currentId = entry.target.getAttribute("id");
 
         navLinks.forEach((link) => {
-          const href = link.getAttribute("href").replace("#", "");
-          if (href === currentId) {
+          const hrefId = decodeURIComponent(link.getAttribute("href").replace("#", ""));
+          if (hrefId === currentId) {
             link.classList.add("active");
           } else {
             link.classList.remove("active");
