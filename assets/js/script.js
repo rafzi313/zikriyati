@@ -135,6 +135,23 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  const swiper = new Swiper('.reviews-slider', {
+  // Enables swipe touch & arrows simultaneously
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+  breakpoints: {
+    0: {
+      slidesPerView: 1,
+      navigation: { enabled: true } // Keeps arrows active on mobile
+    },
+    768: {
+      slidesPerView: 2,
+    }
+  }
+});
+  
   // 2. Highlight on Scroll using IntersectionObserver
   const observerOptions = {
     root: null,
