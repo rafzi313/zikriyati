@@ -1198,7 +1198,46 @@ font-family: 'Mehr Nastaliq', 'MehrNastaliqRegular', 'Noto Nastaliq Urdu', serif
 }
 
 
+/* Ensure slider navigation buttons remain visible on mobile */
+.slider-btn,
+.swiper-button-next,
+.swiper-button-prev {
+  display: flex !important; /* Forces visibility on all screen sizes */
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background-color: rgba(24, 22, 20, 0.85);
+  border: 1px solid rgba(224, 169, 109, 0.4);
+  color: #e0a96d;
+  z-index: 10;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent; /* Removes blue overlay box on mobile tap */
+  transition: all 0.3s ease;
+}
 
+/* Adjust size & position specifically for Mobile Screens */
+@media (max-width: 768px) {
+  .slider-btn,
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: 32px;
+    height: 32px;
+    font-size: 1.4rem;
+  }
+
+  /* Prevent arrows from cutting off at screen edges on small devices */
+  .swiper-button-prev,
+  .slider-btn.prev {
+    left: 5px !important;
+  }
+
+  .swiper-button-next,
+  .slider-btn.next {
+    right: 5px !important;
+  }
+}
 
 
 /*-----------------------------------*\
